@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: vhc-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: kovehicle
+      POSTGRES_PASSWORD: 199433
+      POSTGRES_DB: ko_vehicle
+    ports:
+      - "5433:5432"
+    volumes:
+      - vhc_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  vhc_postgres_data:
