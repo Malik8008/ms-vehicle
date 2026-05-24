@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface IVehicleService {
     List<GetVehicleDTO> getVehicles();
+    List<GetVehicleDTO> findByUserId(Long userId);
     GetVehicleDTO getById(Long id);
     GetVehicleDTO create(PostVehicleDTO postVehicleDTO);
     GetVehicleDTO update(Long id, PutVehicleDTO putVehicleDTO);

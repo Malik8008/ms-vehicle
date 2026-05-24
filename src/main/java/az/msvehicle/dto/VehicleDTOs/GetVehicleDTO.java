@@ -7,6 +7,5 @@ public class GetVehicleDTO {
     Long id;
     String brand;
     String model;
-    boolean deleted;
     Long userId;
 }

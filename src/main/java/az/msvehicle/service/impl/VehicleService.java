@@ -27,6 +27,12 @@ public class VehicleService implements IVehicleService{
     }
 
     @Override
+    public List<GetVehicleDTO> findByUserId(Long userId) {
+        return vehicleRepository.findByUserId(userId)
+                .stream().map(vhcWithUser->modelMapper.map(vhcWithUser, GetVehicleDTO.class)).toList();
+    }
+
+    @Override
     public GetVehicleDTO getById(Long id) {
        Vehicle existVehicle = vehicleRepository.findByIdAndDeletedFalse(id).orElseThrow(()-> new IdNotFoundException("Vehicle with id:"+id+ " not found"));
        return modelMapper.map(existVehicle,GetVehicleDTO.class);
@@ -36,7 +42,13 @@ public class VehicleService implements IVehicleService{
     public GetVehicleDTO create(PostVehicleDTO postVehicleDTO) {
         userClient.getUserById(postVehicleDTO.getUserId());
 
-        Vehicle vehicle = modelMapper.map(postVehicleDTO,Vehicle.class);
+        Vehicle vehicle = new Vehicle();
+
+        vehicle.setBrand(postVehicleDTO.getBrand());
+        vehicle.setModel(postVehicleDTO.getModel());
+        vehicle.setUserId(postVehicleDTO.getUserId());
+        vehicle.setDeleted(false);
+
         Vehicle saveVehicle = vehicleRepository.save(vehicle);
         return modelMapper.map(saveVehicle,GetVehicleDTO.class);
     }

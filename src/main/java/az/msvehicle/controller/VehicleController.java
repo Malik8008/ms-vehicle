@@ -26,6 +26,11 @@ public class VehicleController {
         return ResponseEntity.ok(vehicleService.getById(id));
     }
 
+    @GetMapping("/user/{id}")
+    public ResponseEntity<List<GetVehicleDTO>> getByUserId(@PathVariable Long id){
+        return ResponseEntity.ok(vehicleService.findByUserId(id));
+    }
+
     @PostMapping
     public ResponseEntity<GetVehicleDTO> create(@RequestBody PostVehicleDTO postVehicleDTO){
         return ResponseEntity.ok(vehicleService.create(postVehicleDTO));
