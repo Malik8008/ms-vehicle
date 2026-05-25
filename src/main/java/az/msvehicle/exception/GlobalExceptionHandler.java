@@ -11,15 +11,15 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<Map<String,String>> getErrors(Exception ex){
-        Map<String,String> errors = new HashMap<>();
+    public ResponseEntity<Map<String, String>> getErrors(Exception ex) {
+        Map<String, String> errors = new HashMap<>();
         errors.put("error", ex.getMessage());
         return new ResponseEntity<>(errors, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(value = IdNotFoundException.class)
-    public ResponseEntity<?> InvalidDTO(IdNotFoundException idNotFoundException){
-        return new ResponseEntity<>(idNotFoundException.getMessage(),HttpStatus.BAD_REQUEST);
+    public ResponseEntity<?> InvalidDTO(IdNotFoundException idNotFoundException) {
+        return new ResponseEntity<>(idNotFoundException.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
 }

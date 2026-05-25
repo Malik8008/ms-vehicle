@@ -16,31 +16,33 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class VehicleService implements IVehicleService{
+public class VehicleService implements IVehicleService {
     private final VehicleRepository vehicleRepository;
     private final ModelMapper modelMapper;
     private final UserClient userClient;
+
     @Override
     public List<GetVehicleDTO> getVehicles() {
         return vehicleRepository.findAllByDeletedFalse()
-                .stream().map(vhc->modelMapper.map(vhc, GetVehicleDTO.class)).toList();
+                .stream().map(vhc -> modelMapper.map(vhc, GetVehicleDTO.class)).toList();
     }
 
     @Override
     public List<GetVehicleDTO> findByUserId(Long userId) {
         return vehicleRepository.findByUserId(userId)
-                .stream().map(vhcWithUser->modelMapper.map(vhcWithUser, GetVehicleDTO.class)).toList();
+                .stream().map(vhcWithUser -> modelMapper.map(vhcWithUser, GetVehicleDTO.class)).toList();
     }
 
     @Override
     public GetVehicleDTO getById(Long id) {
-       Vehicle existVehicle = vehicleRepository.findByIdAndDeletedFalse(id).orElseThrow(()-> new IdNotFoundException("Vehicle with id:"+id+ " not found"));
-       return modelMapper.map(existVehicle,GetVehicleDTO.class);
+        Vehicle existVehicle = vehicleRepository.findByIdAndDeletedFalse(id)
+                .orElseThrow(() -> new IdNotFoundException("Vehicle with id:" + id + " not found"));
+        return modelMapper.map(existVehicle, GetVehicleDTO.class);
     }
 
     @Override
     public GetVehicleDTO create(PostVehicleDTO postVehicleDTO) {
-        userClient.getUserById(postVehicleDTO.getUserId());
+        userClient.getUserByIdInternal(postVehicleDTO.getUserId());
 
         Vehicle vehicle = new Vehicle();
 
@@ -50,26 +52,26 @@ public class VehicleService implements IVehicleService{
         vehicle.setDeleted(false);
 
         Vehicle saveVehicle = vehicleRepository.save(vehicle);
-        return modelMapper.map(saveVehicle,GetVehicleDTO.class);
+        return modelMapper.map(saveVehicle, GetVehicleDTO.class);
     }
 
     @Override
     public GetVehicleDTO update(Long id, PutVehicleDTO putVehicleDTO) {
         Vehicle existVehicle = vehicleRepository.findByIdAndDeletedFalse(id)
-                .orElseThrow(()-> new IdNotFoundException("Vehicle with id:"+id+ " not found"));
+                .orElseThrow(() -> new IdNotFoundException("Vehicle with id:" + id + " not found"));
         existVehicle.setBrand(putVehicleDTO.getBrand());
         existVehicle.setModel(putVehicleDTO.getModel());
         existVehicle.setUserId(putVehicleDTO.getUserId());
 
         Vehicle updateVehicle = vehicleRepository.save(existVehicle);
 
-        return modelMapper.map(updateVehicle,GetVehicleDTO.class);
+        return modelMapper.map(updateVehicle, GetVehicleDTO.class);
     }
 
     @Override
     public void delete(Long id) {
         Vehicle existVehicle = vehicleRepository.findByIdAndDeletedFalse(id)
-                .orElseThrow(()-> new IdNotFoundException("Vehicle with:"+id+" not found"));
+                .orElseThrow(() -> new IdNotFoundException("Vehicle with:" + id + " not found"));
         existVehicle.setDeleted(true);
         vehicleRepository.save(existVehicle);
     }

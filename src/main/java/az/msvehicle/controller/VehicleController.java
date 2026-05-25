@@ -17,33 +17,33 @@ public class VehicleController {
     private final VehicleService vehicleService;
 
     @GetMapping
-    public ResponseEntity<List<GetVehicleDTO>> getAll(){
+    public ResponseEntity<List<GetVehicleDTO>> getAll() {
         return ResponseEntity.ok(vehicleService.getVehicles());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GetVehicleDTO> getById(@PathVariable Long id){
+    public ResponseEntity<GetVehicleDTO> getById(@PathVariable Long id) {
         return ResponseEntity.ok(vehicleService.getById(id));
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<List<GetVehicleDTO>> getByUserId(@PathVariable Long id){
+    public ResponseEntity<List<GetVehicleDTO>> getByUserId(@PathVariable Long id) {
         return ResponseEntity.ok(vehicleService.findByUserId(id));
     }
 
     @PostMapping
-    public ResponseEntity<GetVehicleDTO> create(@RequestBody PostVehicleDTO postVehicleDTO){
+    public ResponseEntity<GetVehicleDTO> create(@RequestBody PostVehicleDTO postVehicleDTO) {
         return ResponseEntity.ok(vehicleService.create(postVehicleDTO));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<GetVehicleDTO> update(@PathVariable Long id,
-                                                @RequestBody PutVehicleDTO putVehicleDTO){
-        return ResponseEntity.ok(vehicleService.update(id,putVehicleDTO));
+                                                @RequestBody PutVehicleDTO putVehicleDTO) {
+        return ResponseEntity.ok(vehicleService.update(id, putVehicleDTO));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         vehicleService.delete(id);
         return ResponseEntity.noContent().build();
     }
