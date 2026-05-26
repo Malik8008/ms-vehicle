@@ -1,12 +1,12 @@
 package az.msvehicle.client;
 
-import az.msvehicle.dto.UserDTO.GetUserDto;
+import az.msvehicle.dto.user.GetUserDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "ms-user", url = "http://localhost:8081")
+//@FeignClient(name = "ms-user", url = "http://localhost:8081")
 public interface UserClient {
-    @GetMapping("/internal/user/{id}")
+    //@GetMapping("/internal/user/{id}")
     GetUserDto getUserByIdInternal(@PathVariable Long id);
 }

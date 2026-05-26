@@ -1,8 +1,8 @@
 package az.msvehicle.controller;
 
-import az.msvehicle.dto.VehicleDTOs.GetVehicleDTO;
-import az.msvehicle.dto.VehicleDTOs.PostVehicleDTO;
-import az.msvehicle.dto.VehicleDTOs.PutVehicleDTO;
+import az.msvehicle.dto.vehicle.GetVehicleDTO;
+import az.msvehicle.dto.vehicle.PostVehicleDTO;
+import az.msvehicle.dto.vehicle.PutVehicleDTO;
 import az.msvehicle.service.impl.VehicleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

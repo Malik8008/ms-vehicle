@@ -1,4 +1,4 @@
-package az.msvehicle.dto.VehicleDTOs;
+package az.msvehicle.dto.vehicle;
 
 import lombok.Data;
 
@@ -6,5 +6,6 @@ import lombok.Data;
 public class PostVehicleDTO {
     String brand;
     String model;
-    Long userId;
+    //Long userId;
+    Long personId;
 }

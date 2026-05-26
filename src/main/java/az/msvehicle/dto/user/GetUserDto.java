@@ -1,4 +1,4 @@
-package az.msvehicle.dto.UserDTO;
+package az.msvehicle.dto.user;
 
 import lombok.Data;
 
